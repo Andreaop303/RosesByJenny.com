@@ -1,0 +1,552 @@
+import Link from "next/link"
+import Image from "next/image"
+import { Heart, ShoppingBag, Mail, Phone, MapPin, Instagram, Facebook, Twitter } from "lucide-react"
+import { Button } from "@/components/ui/button"
+
+export default function Home() {
+  return (
+    <div className="flex min-h-screen flex-col bg-[#fdf8f6]">
+      <header className="sticky top-0 z-50 w-full border-b border-[#f3e6e3] bg-[#fdf8f6]/80 backdrop-blur-sm">
+        <div className="container flex h-16 items-center justify-between">
+          <Link href="/" className="flex items-center gap-2 font-script text-2xl">
+            <span className="text-[#d4a0a7]">Roses</span>
+            <span className="text-[#8c7973]">by Jenny</span>
+          </Link>
+          <nav className="hidden md:flex gap-6">
+            <Link href="#" className="text-sm font-medium text-[#8c7973] hover:text-[#d4a0a7] transition-colors">
+              Home
+            </Link>
+            <Link
+              href="#products"
+              className="text-sm font-medium text-[#8c7973] hover:text-[#d4a0a7] transition-colors"
+            >
+              Collection
+            </Link>
+            <Link href="#about" className="text-sm font-medium text-[#8c7973] hover:text-[#d4a0a7] transition-colors">
+              About
+            </Link>
+            <Link href="#contact" className="text-sm font-medium text-[#8c7973] hover:text-[#d4a0a7] transition-colors">
+              Contact
+            </Link>
+          </nav>
+          <div className="flex items-center gap-4">
+            <Link
+              href="#"
+              className="hidden sm:flex items-center gap-1 text-sm font-medium text-[#8c7973] hover:text-[#d4a0a7] transition-colors"
+            >
+              <Heart className="h-4 w-4" />
+              <span>Wishlist</span>
+            </Link>
+            <Button variant="outline" size="icon" className="relative border-[#e9d4d0] text-[#8c7973]">
+              <ShoppingBag className="h-4 w-4" />
+              <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-[#d4a0a7] text-[10px] font-medium text-white">
+                0
+              </span>
+            </Button>
+            <Button className="hidden md:inline-flex bg-[#d4a0a7] hover:bg-[#c08e95] text-white border-none">
+              Shop Now
+            </Button>
+          </div>
+        </div>
+      </header>
+      <main className="flex-1">
+        <section className="relative">
+          <div className="absolute inset-0 bg-gradient-to-r from-[#fdf8f6]/90 to-[#fdf8f6]/70" />
+          <div className="container relative flex flex-col items-center justify-center py-24 md:py-32 lg:flex-row lg:gap-8">
+            <div className="max-w-md text-center lg:text-left lg:pb-0 pb-8">
+              <h1 className="font-script text-4xl tracking-tight sm:text-5xl md:text-6xl text-[#8c7973]">
+                Timeless <span className="text-[#d4a0a7]">Beauty</span> That Lasts
+              </h1>
+              <p className="mt-6 text-lg text-[#8c7973]/80">
+                Handcrafted eternal roses that stay beautiful for years without water or sunlight. Each arrangement is
+                created with love in New York City.
+              </p>
+              <div className="mt-8 flex flex-wrap justify-center gap-4 lg:justify-start">
+                <Button className="bg-[#d4a0a7] hover:bg-[#c08e95] text-white border-none">Explore Collection</Button>
+                <Button variant="outline" className="border-[#e9d4d0] text-[#8c7973] hover:bg-[#f3e6e3]">
+                  Our Story
+                </Button>
+              </div>
+            </div>
+            <div className="relative h-[300px] w-full max-w-md lg:h-[500px]">
+              <Image
+                src="/placeholder.svg?height=500&width=500"
+                alt="Elegant arrangement of preserved roses in a luxury box"
+                fill
+                className="object-cover rounded-lg shadow-lg"
+                priority
+              />
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-[#f3e6e3]/30 py-16" id="products">
+          <div className="container">
+            <h2 className="text-center font-script text-3xl sm:text-4xl mb-4 text-[#8c7973]">
+              Our <span className="text-[#d4a0a7]">Collection</span>
+            </h2>
+            <p className="text-center text-[#8c7973]/80 max-w-xl mx-auto mb-12">
+              Each arrangement is handcrafted with care, preserving the natural beauty of our roses for years to come.
+            </p>
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              {products.map((product) => (
+                <div
+                  key={product.id}
+                  className="group relative overflow-hidden rounded-lg bg-white shadow-sm transition-all hover:shadow-md"
+                >
+                  <div className="aspect-square overflow-hidden">
+                    <Image
+                      src={product.image || "/placeholder.svg"}
+                      alt={product.name}
+                      width={300}
+                      height={300}
+                      className="h-full w-full object-cover transition-transform group-hover:scale-105"
+                    />
+                  </div>
+                  <div className="p-4">
+                    <h3 className="font-medium text-[#8c7973]">{product.name}</h3>
+                    <p className="mt-1 text-sm text-[#8c7973]/70">{product.description}</p>
+                    <div className="mt-2 flex items-center justify-between">
+                      <span className="font-semibold text-[#d4a0a7]">${product.price}</span>
+                      <Button
+                        size="sm"
+                        variant="ghost"
+                        className="h-8 w-8 p-0 text-[#d4a0a7] hover:text-[#c08e95] hover:bg-[#f3e6e3]/50"
+                      >
+                        <Heart className="h-4 w-4" />
+                        <span className="sr-only">Add to wishlist</span>
+                      </Button>
+                    </div>
+                  </div>
+                  <Link href="#" className="absolute inset-0" aria-label={`View ${product.name}`} />
+                </div>
+              ))}
+            </div>
+            <div className="mt-12 text-center">
+              <Button className="bg-[#d4a0a7] hover:bg-[#c08e95] text-white border-none">View All Arrangements</Button>
+            </div>
+          </div>
+        </section>
+
+        <section className="py-16" id="about">
+          <div className="container">
+            <div className="grid gap-8 lg:grid-cols-2 lg:gap-16 items-center">
+              <div className="relative h-[300px] lg:h-[500px] rounded-lg overflow-hidden shadow-sm">
+                <Image
+                  src="/placeholder.svg?height=500&width=500"
+                  alt="Jenny creating an eternal rose arrangement in her New York studio"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <div>
+                <h2 className="font-script text-3xl sm:text-4xl mb-6 text-[#8c7973]">
+                  About <span className="text-[#d4a0a7]">Roses by Jenny</span>
+                </h2>
+                <div className="space-y-4 text-[#8c7973]/80">
+                  <p>
+                    Founded by Jenny in the heart of New York City, Roses by Jenny specializes in preserved roses that
+                    maintain their natural beauty for years without requiring water or sunlight.
+                  </p>
+                  <p>
+                    My journey began with a passion for floral design and a desire to create lasting memories. Each
+                    arrangement is personally crafted with attention to detail and a commitment to quality.
+                  </p>
+                  <p>
+                    Our unique preservation process uses plant-based, eco-friendly solutions that allow our roses to
+                    maintain their soft texture and vibrant colors for 1-3 years or more.
+                  </p>
+                </div>
+                <div className="mt-8">
+                  <h3 className="font-medium text-xl mb-4 text-[#8c7973]">Why Choose Our Eternal Roses?</h3>
+                  <ul className="space-y-2">
+                    <li className="flex items-start">
+                      <span className="mr-2 text-[#d4a0a7]">✓</span>
+                      <span className="text-[#8c7973]/80">Handcrafted with love in New York City</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="mr-2 text-[#d4a0a7]">✓</span>
+                      <span className="text-[#8c7973]/80">Long-lasting beauty without maintenance</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="mr-2 text-[#d4a0a7]">✓</span>
+                      <span className="text-[#8c7973]/80">Perfect for gifts and special occasions</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="mr-2 text-[#d4a0a7]">✓</span>
+                      <span className="text-[#8c7973]/80">Eco-friendly and sustainable materials</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-[#f3e6e3]/30 py-16">
+          <div className="container">
+            <h2 className="text-center font-script text-3xl sm:text-4xl mb-4 text-[#8c7973]">
+              What Our <span className="text-[#d4a0a7]">Clients Say</span>
+            </h2>
+            <p className="text-center text-[#8c7973]/80 max-w-xl mx-auto mb-12">
+              Bringing joy and lasting beauty to homes across New York and beyond.
+            </p>
+            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+              {testimonials.map((testimonial, index) => (
+                <div key={index} className="rounded-lg bg-white p-6 shadow-sm">
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="h-12 w-12 overflow-hidden rounded-full bg-[#f3e6e3]">
+                      <Image
+                        src="/placeholder.svg?height=48&width=48"
+                        alt={testimonial.name}
+                        width={48}
+                        height={48}
+                        className="h-full w-full object-cover"
+                      />
+                    </div>
+                    <div>
+                      <h3 className="font-medium text-[#8c7973]">{testimonial.name}</h3>
+                      <p className="text-sm text-[#8c7973]/70">{testimonial.location}</p>
+                    </div>
+                  </div>
+                  <p className="text-[#8c7973]/80 italic">{testimonial.text}</p>
+                  <div className="mt-4 flex text-[#d4a0a7]">{"★".repeat(5)}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="py-16" id="contact">
+          <div className="container">
+            <h2 className="text-center font-script text-3xl sm:text-4xl mb-4 text-[#8c7973]">
+              Get in <span className="text-[#d4a0a7]">Touch</span>
+            </h2>
+            <p className="text-center text-[#8c7973]/80 max-w-xl mx-auto mb-12">
+              Have questions or want to place a custom order? We'd love to hear from you.
+            </p>
+            <div className="grid gap-8 lg:grid-cols-2">
+              <div>
+                <form className="space-y-4">
+                  <div className="grid gap-4 sm:grid-cols-2">
+                    <div>
+                      <label htmlFor="name" className="block text-sm font-medium mb-1 text-[#8c7973]">
+                        Name
+                      </label>
+                      <input
+                        id="name"
+                        type="text"
+                        className="w-full rounded-md border border-[#e9d4d0] bg-white px-3 py-2 text-sm focus:border-[#d4a0a7] focus:outline-none focus:ring-1 focus:ring-[#d4a0a7]"
+                        placeholder="Your name"
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="email" className="block text-sm font-medium mb-1 text-[#8c7973]">
+                        Email
+                      </label>
+                      <input
+                        id="email"
+                        type="email"
+                        className="w-full rounded-md border border-[#e9d4d0] bg-white px-3 py-2 text-sm focus:border-[#d4a0a7] focus:outline-none focus:ring-1 focus:ring-[#d4a0a7]"
+                        placeholder="Your email"
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <label htmlFor="subject" className="block text-sm font-medium mb-1 text-[#8c7973]">
+                      Subject
+                    </label>
+                    <input
+                      id="subject"
+                      type="text"
+                      className="w-full rounded-md border border-[#e9d4d0] bg-white px-3 py-2 text-sm focus:border-[#d4a0a7] focus:outline-none focus:ring-1 focus:ring-[#d4a0a7]"
+                      placeholder="Subject"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="message" className="block text-sm font-medium mb-1 text-[#8c7973]">
+                      Message
+                    </label>
+                    <textarea
+                      id="message"
+                      rows={4}
+                      className="w-full rounded-md border border-[#e9d4d0] bg-white px-3 py-2 text-sm focus:border-[#d4a0a7] focus:outline-none focus:ring-1 focus:ring-[#d4a0a7]"
+                      placeholder="Your message"
+                    />
+                  </div>
+                  <Button className="w-full bg-[#d4a0a7] hover:bg-[#c08e95] text-white border-none">
+                    Send Message
+                  </Button>
+                </form>
+              </div>
+              <div className="space-y-6">
+                <div>
+                  <h3 className="font-medium text-xl mb-4 text-[#8c7973]">Contact Information</h3>
+                  <div className="space-y-3">
+                    <div className="flex items-start">
+                      <Mail className="mr-3 h-5 w-5 text-[#d4a0a7] mt-0.5" />
+                      <div>
+                        <p className="font-medium text-[#8c7973]">Email</p>
+                        <p className="text-[#8c7973]/80">hello@rosesbyjenny.com</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start">
+                      <Phone className="mr-3 h-5 w-5 text-[#d4a0a7] mt-0.5" />
+                      <div>
+                        <p className="font-medium text-[#8c7973]">Phone</p>
+                        <p className="text-[#8c7973]/80">+1 (212) 555-7890</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start">
+                      <MapPin className="mr-3 h-5 w-5 text-[#d4a0a7] mt-0.5" />
+                      <div>
+                        <p className="font-medium text-[#8c7973]">Studio</p>
+                        <p className="text-[#8c7973]/80">123 Floral Avenue, New York, NY 10001</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start">
+                      <Instagram className="mr-3 h-5 w-5 text-[#d4a0a7] mt-0.5" />
+                      <div>
+                        <p className="font-medium text-[#8c7973]">Instagram</p>
+                        <a
+                          href="https://instagram.com/rosesby_jenny"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-[#8c7973]/80 hover:text-[#d4a0a7]"
+                        >
+                          @rosesby_jenny
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <h3 className="font-medium text-xl mb-4 text-[#8c7973]">Studio Hours</h3>
+                  <div className="space-y-2 text-[#8c7973]/80">
+                    <div className="flex justify-between">
+                      <span>Monday - Friday</span>
+                      <span>10:00 AM - 6:00 PM</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Saturday</span>
+                      <span>11:00 AM - 4:00 PM</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Sunday</span>
+                      <span>By Appointment</span>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <h3 className="font-medium text-xl mb-4 text-[#8c7973]">Follow Us</h3>
+                  <div className="flex gap-4">
+                    <Link
+                      href="https://instagram.com/rosesby_jenny"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="rounded-full bg-[#f3e6e3] p-2 text-[#d4a0a7] hover:bg-[#e9d4d0] transition-colors"
+                    >
+                      <Instagram className="h-5 w-5" />
+                      <span className="sr-only">Instagram</span>
+                    </Link>
+                    <Link
+                      href="#"
+                      className="rounded-full bg-[#f3e6e3] p-2 text-[#d4a0a7] hover:bg-[#e9d4d0] transition-colors"
+                    >
+                      <Facebook className="h-5 w-5" />
+                      <span className="sr-only">Facebook</span>
+                    </Link>
+                    <Link
+                      href="#"
+                      className="rounded-full bg-[#f3e6e3] p-2 text-[#d4a0a7] hover:bg-[#e9d4d0] transition-colors"
+                    >
+                      <Twitter className="h-5 w-5" />
+                      <span className="sr-only">Twitter</span>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+      <footer className="bg-[#8c7973] text-white py-12">
+        <div className="container">
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+            <div>
+              <h3 className="font-script text-xl mb-4">
+                <span className="text-[#f3e6e3]">Roses</span> by Jenny
+              </h3>
+              <p className="text-[#f3e6e3]/80 mb-4">
+                Handcrafted eternal roses from New York City, bringing timeless beauty to your special moments.
+              </p>
+              <div className="flex gap-4">
+                <Link
+                  href="https://instagram.com/rosesby_jenny"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#f3e6e3]/80 hover:text-[#f3e6e3] transition-colors"
+                >
+                  <Instagram className="h-5 w-5" />
+                  <span className="sr-only">Instagram</span>
+                </Link>
+                <Link href="#" className="text-[#f3e6e3]/80 hover:text-[#f3e6e3] transition-colors">
+                  <Facebook className="h-5 w-5" />
+                  <span className="sr-only">Facebook</span>
+                </Link>
+                <Link href="#" className="text-[#f3e6e3]/80 hover:text-[#f3e6e3] transition-colors">
+                  <Twitter className="h-5 w-5" />
+                  <span className="sr-only">Twitter</span>
+                </Link>
+              </div>
+            </div>
+            <div>
+              <h3 className="font-medium text-lg mb-4 text-[#f3e6e3]">Quick Links</h3>
+              <ul className="space-y-2">
+                <li>
+                  <Link href="#" className="text-[#f3e6e3]/80 hover:text-[#f3e6e3] transition-colors">
+                    Home
+                  </Link>
+                </li>
+                <li>
+                  <Link href="#products" className="text-[#f3e6e3]/80 hover:text-[#f3e6e3] transition-colors">
+                    Collection
+                  </Link>
+                </li>
+                <li>
+                  <Link href="#about" className="text-[#f3e6e3]/80 hover:text-[#f3e6e3] transition-colors">
+                    About Jenny
+                  </Link>
+                </li>
+                <li>
+                  <Link href="#contact" className="text-[#f3e6e3]/80 hover:text-[#f3e6e3] transition-colors">
+                    Contact
+                  </Link>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-medium text-lg mb-4 text-[#f3e6e3]">Customer Care</h3>
+              <ul className="space-y-2">
+                <li>
+                  <Link href="#" className="text-[#f3e6e3]/80 hover:text-[#f3e6e3] transition-colors">
+                    FAQ
+                  </Link>
+                </li>
+                <li>
+                  <Link href="#" className="text-[#f3e6e3]/80 hover:text-[#f3e6e3] transition-colors">
+                    Shipping & Delivery
+                  </Link>
+                </li>
+                <li>
+                  <Link href="#" className="text-[#f3e6e3]/80 hover:text-[#f3e6e3] transition-colors">
+                    Care Instructions
+                  </Link>
+                </li>
+                <li>
+                  <Link href="#" className="text-[#f3e6e3]/80 hover:text-[#f3e6e3] transition-colors">
+                    Terms & Conditions
+                  </Link>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-medium text-lg mb-4 text-[#f3e6e3]">Newsletter</h3>
+              <p className="text-[#f3e6e3]/80 mb-4">Subscribe for updates on new collections and exclusive offers.</p>
+              <form className="flex">
+                <input
+                  type="email"
+                  placeholder="Your email"
+                  className="w-full rounded-l-md border-[#a39490] bg-[#7d6b65] px-3 py-2 text-sm text-white placeholder:text-[#f3e6e3]/60 focus:border-[#f3e6e3] focus:outline-none focus:ring-1 focus:ring-[#f3e6e3]"
+                />
+                <Button className="rounded-l-none bg-[#d4a0a7] hover:bg-[#c08e95] text-white border-none">Join</Button>
+              </form>
+            </div>
+          </div>
+          <div className="mt-8 pt-8 border-t border-[#a39490] text-center text-sm text-[#f3e6e3]/80">
+            <p>
+              © {new Date().getFullYear()} Roses by Jenny. All rights reserved. Handcrafted with love in New York City.
+            </p>
+          </div>
+        </div>
+      </footer>
+    </div>
+  )
+}
+
+const products = [
+  {
+    id: 1,
+    name: "Classic Rose Box",
+    description: "16 preserved roses in a luxury box",
+    price: 89.99,
+    image: "/placeholder.svg?height=300&width=300",
+  },
+  {
+    id: 2,
+    name: "Heart Rose Arrangement",
+    description: "Heart-shaped arrangement with 24 roses",
+    price: 129.99,
+    image: "/placeholder.svg?height=300&width=300",
+  },
+  {
+    id: 3,
+    name: "Single Eternal Rose",
+    description: "One premium preserved rose in glass dome",
+    price: 49.99,
+    image: "/placeholder.svg?height=300&width=300",
+  },
+  {
+    id: 4,
+    name: "Mixed Flower Bouquet",
+    description: "Assorted preserved flowers in elegant wrapping",
+    price: 79.99,
+    image: "/placeholder.svg?height=300&width=300",
+  },
+  {
+    id: 5,
+    name: "Pastel Collection",
+    description: "9 roses in soft pastel colors",
+    price: 69.99,
+    image: "/placeholder.svg?height=300&width=300",
+  },
+  {
+    id: 6,
+    name: "Luxury Gold Box",
+    description: "36 roses in a premium gold box",
+    price: 199.99,
+    image: "/placeholder.svg?height=300&width=300",
+  },
+  {
+    id: 7,
+    name: "Mini Rose Cube",
+    description: "4 roses in a compact acrylic cube",
+    price: 39.99,
+    image: "/placeholder.svg?height=300&width=300",
+  },
+  {
+    id: 8,
+    name: "Enchanted Rose",
+    description: "Beauty and the Beast inspired rose in glass dome",
+    price: 59.99,
+    image: "/placeholder.svg?height=300&width=300",
+  },
+]
+
+const testimonials = [
+  {
+    name: "Sarah Johnson",
+    location: "Manhattan, NY",
+    text: "Jenny's roses are absolutely stunning! I received a box for my anniversary, and they still look perfect after a year. The quality and attention to detail is remarkable.",
+  },
+  {
+    name: "Michael Chen",
+    location: "Brooklyn, NY",
+    text: "I ordered a custom arrangement for my mother's birthday. Jenny was so helpful throughout the process, and the final product exceeded all expectations.",
+  },
+  {
+    name: "Emma Williams",
+    location: "Queens, NY",
+    text: "As someone with allergies, these preserved roses are perfect. They bring beauty to my home without triggering any reactions, and they look just as fresh as the day I got them.",
+  },
+]
